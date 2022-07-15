@@ -11,3 +11,7 @@ export interface Book {
   characters: string[];
   povCharacters: string[];
 }
+
+export interface StateBook extends Book {
+  id: string;
+}
