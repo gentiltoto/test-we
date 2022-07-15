@@ -1,9 +1,11 @@
-import { Heading, Spinner, Flex, Text } from '@chakra-ui/react';
+import { Heading, Spinner, Flex, Text, Divider } from '@chakra-ui/react';
 import React from 'react';
 import { useQuery } from 'react-query';
 import { getBook as getBookFromApi } from '../api/books';
 import useBooksStore from '../stores/books';
 import { useParams } from 'react-router-dom';
+import Characters from '../components/Characters';
+
 
 const Book: React.FC = () => {
   const { id } = useParams();
@@ -15,7 +17,7 @@ const Book: React.FC = () => {
     onSuccess: (data) => {
       if (data) setBook(data);
     },
-    enabled: !!book,
+    enabled: !book,
   });
 
   if (!book) {
@@ -31,8 +33,6 @@ const Book: React.FC = () => {
     )
   }
 
-  console.log(book.characters)
-
   return (
     <>
       <Heading as="h1" mb="8">{book.name}</Heading>
@@ -41,7 +41,11 @@ const Book: React.FC = () => {
       <Text>From {book.country}</Text>
       <Text>Released in {book.released.toString().slice(0, 4)}</Text>
 
-      <Text>There is {book.characters.length} characters in the book. Do you wish to see them ?</Text>
+      <Divider m="8" />
+
+      <Heading as="h2">List of characters in the book</Heading>
+
+      <Characters book={book} />
     </>
   );
 }

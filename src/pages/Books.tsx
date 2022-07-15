@@ -2,7 +2,7 @@ import { Heading, Spinner, Flex, Text, Grid, GridItem } from '@chakra-ui/react';
 import React from 'react';
 import { useQuery } from 'react-query';
 import { getBooks } from '../api/books';
-import BookCard from './BookCard';
+import BookCard from '../components/BookCard';
 import useBooksStore from '../stores/books';
 
 const Books: React.FC = () =>{

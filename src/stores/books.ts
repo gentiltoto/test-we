@@ -1,5 +1,6 @@
 import create from 'zustand'
 import { persist } from "zustand/middleware"
+import extractId from '../lib/extractId';
 import { Book, StateBook } from '../types'
 
 interface BooksState {
@@ -15,13 +16,13 @@ const useBooksStore = create<BooksState>()(persist((set, get) => ({
     books: books.map((book) => ({
       ...book,
       // the [book.url, '0'] is only for typescript as we know it will never be null
-      id: (book.url.match(/https:\/\/www.anapioficeandfire.com\/api\/books\/(\d+)/) || [book.url, '0'])[1],
+      id: extractId(book.url),
     }))
   })),
   setBook: (book: Book) => set((state) => ({
     books: [ ...state.books, {
       ...book,
-      id: (book.url.match(/https:\/\/www.anapioficeandfire.com\/api\/books\/(\d+)/) || [book.url, '0'])[1],
+      id: extractId(book.url),
     } ]
   })),
   getBook: (id: string) => get().books.find((book) => book.id === id),
