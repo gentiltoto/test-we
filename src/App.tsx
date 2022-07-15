@@ -1,14 +1,15 @@
+import { Flex } from '@chakra-ui/react';
 import React from 'react';
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Books from './Books';
 
 function App() {
   return (
-    <main>
+    <Flex as="main" p="4" direction="column" justify="center" align="center">
       <Routes>
         <Route path="/" element={<Books />} />
       </Routes>
-    </main>
+    </Flex>
   );
 }
 
